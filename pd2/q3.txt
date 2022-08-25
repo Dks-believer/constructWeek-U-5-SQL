@@ -1,0 +1,179 @@
+
+
+mysql> create table employeedetails(empid int,fullname varchar(20),managerid int,dateofjoining date,city varchar(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc employeedetails;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| empid         | int         | YES  |     | NULL    |       |
+| fullname      | varchar(20) | YES  |     | NULL    |       |
+| managerid     | int         | YES  |     | NULL    |       |
+| dateofjoining | date        | YES  |     | NULL    |       |
+| city          | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employeedetails values(121,'john snow',321,'2014-01-31','toronto'),(321,'walter white',986,'2015-01-30','california'),(421,'kuldeep rana',876,'2016-11-27','new delhi');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeedetails;
++-------+--------------+-----------+---------------+------------+
+| empid | fullname     | managerid | dateofjoining | city       |
++-------+--------------+-----------+---------------+------------+
+|   121 | john snow    |       321 | 2014-01-31    | toronto    |
+|   321 | walter white |       986 | 2015-01-30    | california |
+|   421 | kuldeep rana |       876 | 2016-11-27    | new delhi  |
++-------+--------------+-----------+---------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table employeesalary(empid int,project varchar(3),salary int ,variable int);
+Query OK, 0 rows affected (0.03 sec)
+
+
+mysql> insert into employeesalary values(121,'p1',8000,500),(321,'p2',10000,1000),(421,'p1',12000,0);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeesalary;
++-------+---------+--------+----------+
+| empid | project | salary | variable |
++-------+---------+--------+----------+
+|   121 | p1      |   8000 |      500 |
+|   321 | p2      |  10000 |     1000 |
+|   421 | p1      |  12000 |        0 |
++-------+---------+--------+----------+
+3 rows in set (0.00 sec)
+==>
+1. Write an SQL query to fetch the employees whose name begins with any two characters, followed by a text “hn” and ending with any
+sequence of characters.   <==
+
+mysql> select fullname from employeedetails where fullname like 'hn%';
+Empty set (0.00 sec)
+
+mysql> select fullname from employeedetails where fullname like '__hn%';
++-----------+
+| fullname  |
++-----------+
+| john snow |
++-----------+
+1 row in set (0.00 sec)
+
+==>
+2. Write an SQL query to fetch common records between two tables.  <==
+
+mysql> select * from employeesalary e1 inner join employeedetails e2 on e1.empid=e2.empid;
++-------+---------+--------+----------+-------+--------------+-----------+---------------+------------+
+| empid | project | salary | variable | empid | fullname     | managerid | dateofjoining | city       |
++-------+---------+--------+----------+-------+--------------+-----------+---------------+------------+
+|   121 | p1      |   8000 |      500 |   121 | john snow    |       321 | 2014-01-31    | toronto    |
+|   321 | p2      |  10000 |     1000 |   321 | walter white |       986 | 2015-01-30    | california |
+|   421 | p1      |  12000 |        0 |   421 | kuldeep rana |       876 | 2016-11-27    | new delhi  |
++-------+---------+--------+----------+-------+--------------+-----------+---------------+------------+
+3 rows in set (0.00 sec)
+
+==>
+
+3. Write an SQL query to fetch records that are present in one table but not in another table.   
+                                              <==
+
+mysql> select * from employeedetails where empid not in (select empid from employeesalary);
+Empty set (0.00 sec)
+
+==>
+4. Write an SQL query to find the maximum, minimum, and average salary of the employees.  
+                                        <==
+
+mysql> select avg(salary),max(salary) as maxsalary, min(salary) as minsalary from employeesalary ;
++-------------+-----------+-----------+
+| avg(salary) | maxsalary | minsalary |
++-------------+-----------+-----------+
+|  10000.0000 |     12000 |      8000 |
++-------------+-----------+-----------+
+1 row in set (0.00 sec)
+==>
+5. Fetch all the employees who are not working on any project
+             <==
+mysql> select empid from employeesalary where project is null;
+Empty set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
